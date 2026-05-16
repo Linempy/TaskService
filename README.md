@@ -65,7 +65,7 @@ make up
    docker compose up -d --build
    ```
 
-   В `docker-compose.yaml` бакет `testbacket` создаётся сервисом `createbuckets` и совпадает с `services.s3.bucketName` в `application.yaml`.
+   В `docker-compose.yaml` бакет `test-backet` создаётся сервисом `createbuckets` и совпадает с `services.s3.bucketName` в `application.yaml`.
 
 
 ## Тесты

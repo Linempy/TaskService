@@ -51,5 +51,5 @@ services:
     endpoint: http://localhost:9000
     access-key: user
     secret-key: password
-    bucketName: testbacket
+    bucketName: test-backet
     isMocked: false

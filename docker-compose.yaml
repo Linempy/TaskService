@@ -43,14 +43,13 @@ services:
         condition: service_healthy
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc config host add minio http://minio:9000 user password;
+      /usr/bin/mc alias set minio http://minio:9000 user password;
       /usr/bin/mc mb minio/test-bucket;
       /usr/bin/mc anonymous set public minio/test-bucket;
       exit 0;
       "
     networks:
       - task-network
-
   app:
     build: .
     ports:
@@ -68,7 +67,7 @@ services:
       SERVICES_S3_ENDPOINT: http://minio:9000
       SERVICES_S3_ACCESS-KEY: user
       SERVICES_S3_SECRET-KEY: password
-      SERVICES_S3_BUCKETNAME: testbucket
+      SERVICES_S3_BUCKETNAME: test-bucket
     networks:
       - task-network
     restart: on-failure
