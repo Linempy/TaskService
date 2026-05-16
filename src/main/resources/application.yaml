@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: task-queue-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/taskdb
+    username: user
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+
+server:
+  port: 8080
+
+thread-pool:
+  async:
+    task:
+      core-pool-size: 5
+      max-pool-size: 10
+      queue-capacity: 10_000
+
+retry:
+  config:
+    max-attempts: 3
+    initial-interval-ms: 1000
+    multiplier: 2.0
+    max-interval-ms: 10_000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+services:
+  s3:
+    endpoint: http://localhost:9000
+    access-key: user
+    secret-key: password
+    bucketName: testbacket
+    isMocked: false

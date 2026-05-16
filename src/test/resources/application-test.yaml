@@ -1,0 +1,39 @@
+spring:
+  liquibase:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  doc:
+    api-docs:
+      enabled: false
+
+services:
+  s3:
+    bucketName: test-bucket
+    endpoint: http://localhost:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+
+app:
+  task:
+    poll-interval: 200
+
+thread-pool:
+  async:
+    task:
+      core-pool-size: 2
+      max-pool-size: 2
+      queue-capacity: 10
+
+logging:
+  level:
+    com.manticore: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.testcontainers: INFO
